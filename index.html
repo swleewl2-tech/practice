@@ -353,6 +353,133 @@
         }
         .menu-chip .chip-emoji { font-size: 1.3rem; display: block; margin-bottom: 4px; }
 
+        /* 제휴 문의 폼 */
+        .inquiry-section {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            margin-top: 48px;
+        }
+        .inquiry-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .inquiry-title h2 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .inquiry-title p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            transition: color 0.3s;
+        }
+        .inquiry-form {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: var(--cat-btn-bg);
+            border: 1px solid var(--cat-btn-border);
+            border-radius: 12px;
+            padding: 11px 14px;
+            font-size: 0.9rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.25s;
+            resize: none;
+        }
+        [data-theme="dark"] .form-group input,
+        [data-theme="dark"] .form-group textarea,
+        [data-theme="dark"] .form-group select {
+            color: rgba(255,255,255,0.9);
+        }
+        [data-theme="dark"] .form-group input::placeholder,
+        [data-theme="dark"] .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.25);
+        }
+        [data-theme="light"] .form-group input::placeholder,
+        [data-theme="light"] .form-group textarea::placeholder {
+            color: rgba(90,58,154,0.35);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.2);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer;
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            color: white;
+            box-shadow: 0 6px 24px rgba(124,58,237,0.45);
+            transition: all 0.25s;
+            margin-top: 4px;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(124,58,237,0.6); }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .form-message {
+            text-align: center;
+            font-size: 0.88rem;
+            padding: 12px;
+            border-radius: 10px;
+            display: none;
+        }
+        .form-message.success {
+            display: block;
+            background: rgba(16,185,129,0.15);
+            color: #10b981;
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+        .form-message.error {
+            display: block;
+            background: rgba(239,68,68,0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+
         /* 컨페티 */
         .confetti-container {
             position: fixed;
@@ -421,6 +548,45 @@
 <div class="menu-grid-section">
     <div class="menu-grid-title">▸ 현재 메뉴 목록</div>
     <div class="menu-grid" id="menu-grid"></div>
+</div>
+
+<!-- 제휴 문의 폼 -->
+<div class="inquiry-section">
+    <div class="inquiry-title">
+        <h2>🤝 제휴 문의</h2>
+        <p>광고, 제휴, 협업 등 문의사항을 남겨주세요</p>
+    </div>
+    <form class="inquiry-form" id="inquiry-form" action="https://formspree.io/f/xjgzqrjz" method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name">이름 *</label>
+                <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+                <label for="company">회사/소속</label>
+                <input type="text" id="company" name="company" placeholder="(주)맛있는회사">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">이메일 *</label>
+            <input type="email" id="email" name="email" placeholder="hello@example.com" required>
+        </div>
+        <div class="form-group">
+            <label for="type">문의 유형</label>
+            <select id="type" name="type">
+                <option value="광고">📢 광고 문의</option>
+                <option value="제휴">🤝 제휴 제안</option>
+                <option value="협업">💡 콘텐츠 협업</option>
+                <option value="기타">📩 기타 문의</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="message">문의 내용 *</label>
+            <textarea id="message" name="message" rows="4" placeholder="문의하실 내용을 자유롭게 작성해주세요." required></textarea>
+        </div>
+        <div class="form-message" id="form-message"></div>
+        <button type="submit" class="submit-btn" id="submit-btn">✉️ 문의 보내기</button>
+    </form>
 </div>
 
 <script>
@@ -749,6 +915,37 @@ function fireConfetti() {
 }
 
 renderGrid();
+
+// 제휴 문의 폼 비동기 제출
+document.getElementById('inquiry-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const msg = document.getElementById('form-message');
+    btn.disabled = true;
+    btn.textContent = '📨 전송 중...';
+    msg.className = 'form-message';
+
+    try {
+        const res = await fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+            msg.className = 'form-message success';
+            msg.textContent = '✅ 문의가 접수됐어요! 빠르게 연락드릴게요.';
+            this.reset();
+            btn.textContent = '✉️ 문의 보내기';
+        } else {
+            throw new Error();
+        }
+    } catch {
+        msg.className = 'form-message error';
+        msg.textContent = '❌ 전송에 실패했어요. 잠시 후 다시 시도해주세요.';
+        btn.textContent = '✉️ 문의 보내기';
+    }
+    btn.disabled = false;
+});
 </script>
 </body>
 </html>
