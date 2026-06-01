@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 저녁 뭐 먹지?</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            width: 380px;
+        }
+        h1 { font-size: 1.6rem; color: #333; margin-bottom: 20px; }
+        #menu-display { font-size: 1.5rem; font-weight: bold; color: #ff6b6b; margin: 20px 0; min-height: 40px; }
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover { background: #ff5252; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>오늘 저녁 뭐 먹지?</h1>
+        <div id="menu-display">버튼을 눌러보세요!</div>
+        <button onclick="pickMenu()">메뉴 추천받기</button>
+    </div>
+
+    <script>
+        const menus = ["김치찌개", "제육볶음", "돈가스", "파스타", "초밥", "햄버거", "쌀국수"];
+        function pickMenu() {
+            const randomIndex = Math.floor(Math.random() * menus.length);
+            document.getElementById('menu-display').innerText = menus[randomIndex];
+        }
+    </script>
+</body>
+</html>
