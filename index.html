@@ -437,12 +437,7 @@
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(124,58,237,0.2);
         }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .submit-btn {
+.submit-btn {
             width: 100%;
             padding: 15px;
             border-radius: 14px;
@@ -557,15 +552,13 @@
         <p>광고, 제휴, 협업 등 문의사항을 남겨주세요</p>
     </div>
     <form class="inquiry-form" id="inquiry-form" action="https://formspree.io/f/xjgzqrjz" method="POST">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="name">이름 *</label>
-                <input type="text" id="name" name="name" placeholder="홍길동" required>
-            </div>
-            <div class="form-group">
-                <label for="company">회사/소속</label>
-                <input type="text" id="company" name="company" placeholder="(주)맛있는회사">
-            </div>
+        <div class="form-group">
+            <label for="name">이름 *</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+            <label for="company">회사/소속</label>
+            <input type="text" id="company" name="company" placeholder="(주)맛있는회사">
         </div>
         <div class="form-group">
             <label for="email">이메일 *</label>
