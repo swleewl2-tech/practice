@@ -475,6 +475,44 @@
             border: 1px solid rgba(239,68,68,0.3);
         }
 
+        /* 댓글 섹션 */
+        .comments-section {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 700px;
+            margin-top: 48px;
+        }
+        .comments-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .comments-title h2 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .comments-title p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            transition: color 0.3s;
+        }
+        .comments-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+        [data-theme="dark"] #disqus_thread { color-scheme: dark; }
+
         /* 컨페티 */
         .confetti-container {
             position: fixed;
@@ -581,6 +619,31 @@
         <button type="submit" class="submit-btn" id="submit-btn">✉️ 문의 보내기</button>
     </form>
 </div>
+
+<!-- 댓글 섹션 -->
+<div class="comments-section">
+    <div class="comments-title">
+        <h2>💬 댓글</h2>
+        <p>오늘 뭐 먹었는지 알려줘요!</p>
+    </div>
+    <div class="comments-box">
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = 'today-what-to-eat';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://woo-7.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>댓글을 보려면 JavaScript를 활성화해주세요. <a href="https://disqus.com/?ref_noscript">Disqus 댓글 보기</a></noscript>
 
 <script>
 const menuData = {
