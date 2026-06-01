@@ -617,11 +617,14 @@
 <div class="confetti-container" id="confetti"></div>
 <div class="share-toast" id="share-toast">📋 링크가 복사됐어요!</div>
 
-<!-- 테마 토글 -->
-<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">
-    <span id="toggle-icon">☀️</span>
-    <span id="toggle-label">라이트 모드</span>
-</button>
+<!-- 상단 바 -->
+<div style="position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;width:100%;max-width:520px;margin-bottom:16px;">
+    <a href="index.html" style="background:var(--toggle-bg);border:1px solid var(--toggle-border);border-radius:999px;padding:8px 18px;font-size:0.85rem;font-family:'Noto Sans KR',sans-serif;text-decoration:none;color:var(--btn-color);backdrop-filter:blur(10px);font-weight:700;display:flex;align-items:center;gap:6px;transition:all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg,#f97316,#a855f7)';this.style.color='white';this.style.borderColor='transparent';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--toggle-bg)';this.style.color='var(--btn-color)';this.style.borderColor='var(--toggle-border)';this.style.transform='none'">🍽️ 오늘 뭐 먹지?</a>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" style="margin-bottom:0;">
+        <span id="toggle-icon">☀️</span>
+        <span id="toggle-label">라이트 모드</span>
+    </button>
+</div>
 
 <div class="header">
     <div class="header-emojis">🐶🐱</div>
