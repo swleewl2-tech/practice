@@ -1,836 +1,387 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="오늘 점심·저녁 메뉴 고민 해결! 한식·중식·일식·양식 등 100가지 이상의 메뉴 중 랜덤으로 추천해드려요. 메뉴 선택 스트레스 없이 오늘의 식사를 즐겨보세요.">
-    <meta name="keywords" content="오늘 뭐 먹지, 메뉴 추천, 랜덤 메뉴, 점심 메뉴, 저녁 메뉴 추천, 한식 추천, 오늘 점심 뭐 먹지">
-    <meta property="og:title" content="오늘 뭐 먹지? — 랜덤 메뉴 추천">
-    <meta property="og:description" content="메뉴 고민 끝! 카테고리별 랜덤 메뉴 추천 서비스">
-    <meta property="og:type" content="website">
-    <title>오늘 뭐 먹지? — 랜덤 메뉴 추천 서비스</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2569272342587616" crossorigin="anonymous"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>린 아이디어 제너레이터</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        :root {
-            --accent: #FF3B30;
-            --accent-hover: #D62B20;
-            --bg: #FFFFFF;
-            --bg-section: #F7F7F5;
-            --text: #111111;
-            --text-sub: #555555;
-            --text-faint: #AAAAAA;
-            --border: #E5E5E5;
-            --border-dark: #CCCCCC;
-            --surface: #FFFFFF;
-            --chip-bg: #F2F2F2;
-            --chip-active-bg: #111111;
-            --chip-active-text: #FFFFFF;
-            --nav-bg: rgba(255,255,255,0.95);
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        body {
-            font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    /* ── Header ── */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 { font-size: 18px; font-weight: 700; }
+    header p  { font-size: 11px; color: #94a3b8; }
 
-        /* ── 네비게이션 ── */
-        .site-header {
-            position: sticky; top: 0; z-index: 100;
-            background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-inner {
-            max-width: 1000px; margin: 0 auto;
-            padding: 0 24px;
-            height: 60px;
-            display: flex; align-items: center; justify-content: space-between; gap: 12px;
-        }
-        .site-logo {
-            font-size: 1rem; font-weight: 900; letter-spacing: -0.5px;
-            color: var(--text);
-            text-decoration: none; white-space: nowrap;
-        }
-        .site-logo span { color: var(--accent); }
-        .nav-links {
-            display: flex; gap: 2px; align-items: center;
-        }
-        .nav-link {
-            padding: 6px 14px; border-radius: 6px; font-size: 0.82rem; font-weight: 500;
-            color: var(--text-sub); text-decoration: none;
-            transition: background 0.15s, color 0.15s;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        .nav-link:hover { background: var(--chip-bg); color: var(--text); }
+    /* ── Main ── */
+    main {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
 
-        /* ── 공통 ── */
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-        section { padding: 80px 0; }
-        section.bg-section { background: var(--bg-section); }
+    /* ── API Key 입력 ── */
+    .api-section {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+    }
+    .api-section label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+    }
+    .api-section input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+      font-family: monospace;
+    }
+    .api-section input:focus { border-color: #2563eb; }
+    .api-section small {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #64748b;
+    }
 
-        .section-eyebrow {
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--accent);
-            margin-bottom: 12px; display: block;
-        }
-        .section-title {
-            font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900;
-            line-height: 1.2; letter-spacing: -1px; margin-bottom: 12px;
-        }
-        .section-desc { font-size: 0.95rem; color: var(--text-sub); line-height: 1.8; }
+    /* ── Input section ── */
+    #view-input { display: flex; flex-direction: column; gap: 24px; }
 
-        /* ── 히어로 ── */
-        #hero { padding: 0; min-height: calc(100vh - 60px); display: flex; align-items: center; border-bottom: 1px solid var(--border); }
-        .hero-grid {
-            display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
-            padding: 80px 0;
-        }
-        .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 0.78rem; font-weight: 700; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--accent);
-            background: #FFF0EF; border: 1px solid #FFCCC8;
-            padding: 5px 12px; border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .hero-title {
-            font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900;
-            line-height: 1.1; letter-spacing: -3px;
-            color: var(--text); margin-bottom: 20px;
-        }
-        .hero-title .accent { color: var(--accent); }
-        .hero-sub {
-            font-size: 1rem; color: var(--text-sub); line-height: 1.8;
-            margin-bottom: 36px; max-width: 440px;
-        }
-        .hero-meta {
-            display: flex; gap: 24px; align-items: center;
-        }
-        .hero-meta-item {
-            display: flex; flex-direction: column; gap: 2px;
-        }
-        .hero-meta-num { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -1px; }
-        .hero-meta-label { font-size: 0.75rem; color: var(--text-faint); font-weight: 500; }
-        .meta-divider { width: 1px; height: 36px; background: var(--border); }
+    .intro { text-align: center; }
+    .intro h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .intro p  { color: #64748b; font-size: 15px; }
 
-        /* ── 뽑기 카드 ── */
-        .picker-card {
-            border: 1px solid var(--border); border-radius: 16px;
-            padding: 36px 32px; background: var(--surface);
-            box-shadow: var(--shadow-md);
-        }
-        .picker-label {
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--text-faint);
-            margin-bottom: 20px; display: block;
-        }
-        .result-area {
-            min-height: 150px; display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            margin-bottom: 24px;
-            border: 1.5px dashed var(--border); border-radius: 12px;
-            background: var(--bg-section); padding: 24px;
-        }
-        .result-emoji-big {
-            font-size: 4rem; line-height: 1; margin-bottom: 10px;
-        }
-        .result-food-name {
-            font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 900;
-            color: var(--text); letter-spacing: -1px;
-            min-height: 48px; display: flex; align-items: center; justify-content: center;
-            text-align: center;
-        }
-        .result-food-cat {
-            font-size: 0.72rem; color: var(--text-faint); letter-spacing: 2px;
-            margin-top: 6px; text-transform: uppercase;
-        }
-        .placeholder-msg {
-            color: var(--text-faint); font-size: 0.9rem; text-align: center; line-height: 1.6;
-        }
-        .rolling-name { color: var(--text-faint) !important; }
-        .pop-anim { animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-        @keyframes popIn { from{transform:scale(0.7);opacity:0;} to{transform:scale(1);opacity:1;} }
+    textarea {
+      width: 100%;
+      height: 180px;
+      padding: 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      resize: none;
+      font-size: 15px;
+      line-height: 1.6;
+      outline: none;
+      transition: border-color 0.15s;
+      background: #fff;
+      color: #1e293b;
+    }
+    textarea:focus { border-color: #2563eb; }
 
-        .pick-btn {
-            width: 100%; padding: 16px; border-radius: 10px; border: none;
-            font-size: 1rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-            cursor: pointer; letter-spacing: 0.3px;
-            background: var(--accent); color: white;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .pick-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-        .pick-btn:active { transform: translateY(0); }
-        .pick-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .error-msg { color: #ef4444; font-size: 13px; }
 
-        .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    button.primary {
+      width: 100%;
+      padding: 16px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button.primary:hover { background: #1d4ed8; }
 
-        /* ── 카테고리 탭 ── */
-        .cat-tabs {
-            display: flex; gap: 6px; flex-wrap: wrap;
-        }
-        .cat-tab {
-            background: var(--chip-bg); border: 1px solid transparent; color: var(--text-sub);
-            padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;
-            cursor: pointer; transition: all 0.15s;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        .cat-tab:hover { background: #EBEBEB; color: var(--text); }
-        .cat-tab.active {
-            background: var(--chip-active-bg); color: var(--chip-active-text);
-            border-color: var(--chip-active-bg);
-        }
+    .hint { text-align: center; font-size: 12px; color: #94a3b8; }
 
-        /* ── 메뉴 섹션 ── */
-        #menu-section { padding: 60px 0; }
-        .menu-section-head {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
-        }
-        .menu-count { font-size: 0.8rem; color: var(--text-faint); font-weight: 500; }
+    /* ── Loading ── */
+    #view-loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 80px 0;
+    }
+    .spinner {
+      width: 52px; height: 52px;
+      border: 4px solid #bfdbfe;
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #view-loading p { font-size: 18px; font-weight: 600; color: #334155; }
+    #view-loading small { font-size: 13px; color: #94a3b8; }
 
-        .menu-list-toggle {
-            display: flex; align-items: center; justify-content: space-between;
-            width: 100%; padding: 12px 16px;
-            background: var(--chip-bg); border: 1px solid var(--border); border-radius: 8px;
-            cursor: pointer; font-size: 0.85rem; font-weight: 700; color: var(--text-sub);
-            font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; margin-top: 12px;
-        }
-        .menu-list-toggle:hover { background: #EBEBEB; color: var(--text); }
-        .toggle-arrow { transition: transform 0.3s; }
-        .toggle-arrow.open { transform: rotate(180deg); }
+    /* ── Result ── */
+    #view-result { display: none; flex-direction: column; gap: 24px; }
 
-        .menu-grid-wrap {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s;
-            opacity: 0;
-        }
-        .menu-grid-wrap.open { opacity: 1; }
-        .menu-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 8px; padding-top: 14px;
-        }
-        .menu-chip {
-            background: var(--bg); border: 1px solid var(--border);
-            border-radius: 8px; padding: 10px 8px; text-align: center;
-            color: var(--text-sub); font-size: 0.78rem; cursor: pointer; transition: all 0.15s;
-        }
-        .menu-chip:hover { border-color: var(--border-dark); color: var(--text); background: var(--bg-section); }
-        .menu-chip.selected {
-            background: var(--accent); border-color: var(--accent); color: white;
-        }
-        .menu-chip .chip-emoji { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+    .result-header { text-align: center; }
+    .result-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .result-header blockquote {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      color: #475569;
+      max-width: 560px;
+      line-height: 1.5;
+    }
 
-        /* ── 사용법 ── */
-        #how-to { padding: 80px 0; }
-        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 48px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .step-card {
-            padding: 36px 28px;
-            background: var(--bg);
-            transition: background 0.2s;
-        }
-        .step-card:hover { background: var(--bg-section); }
-        .step-num {
-            font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
-            color: var(--accent); margin-bottom: 16px;
-        }
-        .step-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
-        .step-title { font-size: 1rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.3px; }
-        .step-desc { font-size: 0.84rem; color: var(--text-sub); line-height: 1.75; }
+    .cards { display: flex; flex-direction: column; gap: 16px; }
 
-        /* ── 카테고리 소개 ── */
-        #food-guide { padding: 80px 0; }
-        .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1px; margin-top: 48px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .guide-card {
-            padding: 28px 24px; background: var(--bg-section);
-            transition: background 0.2s;
-        }
-        .guide-card:hover { background: var(--bg); }
-        .guide-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
-        .guide-name { font-size: 0.95rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.3px; }
-        .guide-desc { font-size: 0.82rem; color: var(--text-sub); line-height: 1.75; }
-        .guide-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
-        .guide-tag {
-            font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 3px;
-            background: var(--chip-bg); color: var(--text-sub);
-        }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      border-left: 4px solid #2563eb;
+      padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: box-shadow 0.15s;
+    }
+    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .card:nth-child(2) { border-left-color: #3b82f6; }
+    .card:nth-child(3) { border-left-color: #1d4ed8; }
 
-        /* ── 추천 팁 ── */
-        #tips-section { padding: 80px 0; }
-        .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 48px; }
-        .tip-card {
-            padding: 28px 24px; border-radius: 12px;
-            border: 1px solid var(--border); background: var(--bg);
-            transition: border-color 0.2s, transform 0.2s;
-        }
-        .tip-card:hover { border-color: var(--border-dark); transform: translateY(-2px); }
-        .tip-emoji { font-size: 1.6rem; margin-bottom: 12px; display: block; }
-        .tip-title { font-size: 0.9rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.3px; }
-        .tip-body { font-size: 0.83rem; color: var(--text-sub); line-height: 1.8; }
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .card-icon {
+      width: 40px; height: 40px;
+      background: #eff6ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .card-title h3 { font-size: 16px; font-weight: 700; }
+    .card-title span { font-size: 11px; color: #94a3b8; display: block; }
+    .card p { font-size: 14px; line-height: 1.75; color: #334155; white-space: pre-wrap; }
 
-        /* ── 소개 ── */
-        #about { padding: 80px 0; }
-        .about-inner { display: grid; grid-template-columns: 280px 1fr; gap: 60px; align-items: start; }
-        .about-big-num { font-size: clamp(4rem, 10vw, 6rem); font-weight: 900; line-height: 1; letter-spacing: -4px; color: var(--accent); }
-        .about-big-label { font-size: 0.82rem; color: var(--text-faint); margin-top: 4px; }
-        .about-text { font-size: 0.95rem; color: var(--text-sub); line-height: 1.9; }
-        .about-text p + p { margin-top: 16px; }
+    button.reset {
+      align-self: center;
+      padding: 12px 36px;
+      border: 2px solid #2563eb;
+      color: #2563eb;
+      background: transparent;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button.reset:hover { background: #eff6ff; }
 
-        /* ── 문의 ── */
-        #contact { padding: 80px 0; }
-        .form-wrap { padding: 40px; border: 1px solid var(--border); border-radius: 16px; margin-top: 40px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
-        .form-group.full { grid-column: 1 / -1; }
-        .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-sub); letter-spacing: 0.5px; }
-        .form-group input, .form-group textarea, .form-group select {
-            background: var(--bg-section); border: 1px solid var(--border); border-radius: 8px;
-            padding: 10px 12px; font-size: 0.9rem; font-family: 'Noto Sans KR', sans-serif;
-            color: var(--text); outline: none; transition: border-color 0.2s; resize: none;
-        }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            border-color: var(--text); background: var(--bg);
-        }
-        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-faint); }
-        .submit-btn {
-            padding: 14px 28px; border-radius: 8px; border: none;
-            font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-            cursor: pointer; background: var(--accent);
-            color: white; transition: background 0.2s; margin-top: 8px;
-        }
-        .submit-btn:hover { background: var(--accent-hover); }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .form-msg { display:none; font-size:0.85rem; padding:10px 14px; border-radius:6px; margin-top:8px; }
-        .form-msg.ok  { display:block; background:#F0FDF4; color:#166534; border:1px solid #BBF7D0; }
-        .form-msg.err { display:block; background:#FFF0EF; color:#991B1B; border:1px solid #FFCCC8; }
-
-        /* ── 댓글 ── */
-        #comments { padding: 80px 0; border-top: 1px solid var(--border); }
-        .comments-box { margin-top: 40px; border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
-
-        /* ── 푸터 ── */
-        footer {
-            border-top: 1px solid var(--border);
-            background: var(--bg-section);
-        }
-        .footer-inner {
-            max-width: 1000px; margin: 0 auto; padding: 32px 24px;
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
-        }
-        .footer-logo { font-size: 0.9rem; font-weight: 900; color: var(--text); }
-        .footer-logo span { color: var(--accent); }
-        .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
-        .footer-link {
-            font-size: 0.8rem; font-weight: 500;
-            color: var(--text-sub); text-decoration: none;
-            transition: color 0.15s;
-        }
-        .footer-link:hover { color: var(--text); }
-        .footer-copy { font-size: 0.75rem; color: var(--text-faint); }
-
-        /* ── 컨페티 ── */
-        .confetti-box { position:fixed;inset:0;pointer-events:none;z-index:999; }
-        .cp { position:absolute; border-radius:2px; animation:fall linear forwards; }
-        @keyframes fall { 0%{transform:translateY(-20px) rotate(0);opacity:1;} 100%{transform:translateY(110vh) rotate(720deg);opacity:0;} }
-
-        @media(max-width:768px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-            .steps { grid-template-columns: 1fr; }
-            .about-inner { grid-template-columns: 1fr; gap: 24px; }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-wrap { padding: 24px; }
-            .picker-card { padding: 24px 20px; }
-        }
-        @media(max-width:600px) {
-            section { padding: 60px 0; }
-            .nav-links .nav-link { display: none; }
-        }
-    </style>
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: #cbd5e1;
+      border-top: 1px solid #f1f5f9;
+      background: #fff;
+    }
+  </style>
 </head>
 <body>
 
-<div class="confetti-box" id="confetti"></div>
-
-<!-- ── 네비게이션 ── -->
-<header class="site-header">
-    <div class="nav-inner">
-        <a class="site-logo" href="#hero">뭐<span>먹</span>지</a>
-        <nav class="nav-links">
-            <a class="nav-link" href="#how-to">사용법</a>
-            <a class="nav-link" href="#about">소개</a>
-            <a class="nav-link" href="#contact">문의</a>
-            <a class="nav-link" href="privacy.html">개인정보처리방침</a>
-        </nav>
+  <!-- Header -->
+  <header>
+    <span style="font-size:24px">🌱</span>
+    <div>
+      <h1>린 아이디어 제너레이터</h1>
+      <p>Lean Idea Generator</p>
     </div>
-</header>
+  </header>
 
-<!-- ── 히어로 ── -->
-<section id="hero">
-    <div class="container">
-        <div class="hero-grid">
-            <div>
-                <div class="hero-eyebrow">🎲 랜덤 메뉴 추천</div>
-                <h1 class="hero-title">오늘<br><span class="accent">뭐 먹지?</span></h1>
-                <p class="hero-sub">메뉴 고민으로 낭비하는 시간, 이제 그만.<br>100가지 이상의 메뉴 중 딱 하나, 바로 골라드려요.</p>
-                <div class="hero-meta">
-                    <div class="hero-meta-item">
-                        <span class="hero-meta-num">100+</span>
-                        <span class="hero-meta-label">등록 메뉴</span>
-                    </div>
-                    <div class="meta-divider"></div>
-                    <div class="hero-meta-item">
-                        <span class="hero-meta-num">8</span>
-                        <span class="hero-meta-label">카테고리</span>
-                    </div>
-                    <div class="meta-divider"></div>
-                    <div class="hero-meta-item">
-                        <span class="hero-meta-num">0초</span>
-                        <span class="hero-meta-label">고민 시간</span>
-                    </div>
-                </div>
-            </div>
+  <!-- Main -->
+  <main>
 
-            <div class="picker-card">
-                <span class="picker-label">메뉴 뽑기</span>
-                <div class="result-area">
-                    <div class="result-emoji-big" id="result-emoji" style="display:none"></div>
-                    <div class="result-food-name" id="result-name">
-                        <span class="placeholder-msg">버튼을 눌러<br>오늘의 메뉴를 뽑아봐요</span>
-                    </div>
-                    <div class="result-food-cat" id="result-cat"></div>
-                </div>
-                <div class="divider"></div>
-                <div class="cat-tabs" id="cat-tabs" style="margin-bottom:16px;">
-                    <button class="cat-tab active" onclick="setCategory('all',this)">전체</button>
-                    <button class="cat-tab" onclick="setCategory('korean',this)">한식</button>
-                    <button class="cat-tab" onclick="setCategory('chinese',this)">중식</button>
-                    <button class="cat-tab" onclick="setCategory('japanese',this)">일식</button>
-                    <button class="cat-tab" onclick="setCategory('western',this)">양식</button>
-                    <button class="cat-tab" onclick="setCategory('snack',this)">분식</button>
-                    <button class="cat-tab" onclick="setCategory('asian',this)">아시안</button>
-                    <button class="cat-tab" onclick="setCategory('bbq',this)">구이·탕</button>
-                    <button class="cat-tab" onclick="setCategory('light',this)">간단식</button>
-                </div>
-                <button class="pick-btn" id="pick-btn" onclick="pickMenu()">🎲 랜덤 메뉴 뽑기</button>
-            </div>
-        </div>
+    <!-- API Key -->
+    <div class="api-section">
+      <label>🔑 Gemini API 키</label>
+      <input type="password" id="apiKey" placeholder="AIzaSy... (Google AI Studio에서 발급)" />
+      <small>키는 이 브라우저 세션에서만 사용되며 어디에도 저장되지 않습니다.</small>
     </div>
-</section>
 
-<!-- ── 메뉴 목록 ── -->
-<section id="menu-section" class="bg-section">
-    <div class="container">
-        <div class="menu-section-head">
-            <div>
-                <span class="section-eyebrow">MENU LIST</span>
-                <h2 class="section-title" style="margin-bottom:0;">전체 메뉴 목록</h2>
-            </div>
-            <span class="menu-count" id="menu-count"></span>
-        </div>
+    <!-- Input View -->
+    <div id="view-input">
+      <div class="intro">
+        <h2>어떤 문제를 해결하고 싶으신가요?</h2>
+        <p>평소에 느낀 불편함이나 Pain Point를 자유롭게 입력해 보세요.</p>
+      </div>
 
-        <button class="menu-list-toggle" id="menu-toggle-btn" onclick="toggleMenuGrid()">
-            <span id="toggle-label-btn">📋 메뉴 목록 펼치기</span>
-            <span class="toggle-arrow" id="toggle-arrow">▾</span>
-        </button>
-        <div class="menu-grid-wrap" id="menu-grid-wrap">
-            <div class="menu-grid" id="menu-grid"></div>
-        </div>
+      <textarea id="painPoint"
+        placeholder="예: 운동을 꾸준히 하고 싶은데 혼자 하면 금방 포기하게 된다. 헬스장 PT는 너무 비싸고, 온라인 운동 영상은 나를 봐주는 사람이 없어서 금방 흥미를 잃는다..."
+      ></textarea>
+
+      <p class="error-msg" id="errorMsg" style="display:none"></p>
+
+      <button class="primary" onclick="generate()">솔루션 생성하기</button>
+      <p class="hint">Ctrl + Enter 로도 실행할 수 있습니다</p>
     </div>
-</section>
 
-<!-- ── 사용 방법 ── -->
-<section id="how-to">
-    <div class="container">
-        <span class="section-eyebrow">HOW TO USE</span>
-        <h2 class="section-title">3단계로 끝나는<br>메뉴 선택</h2>
-        <p class="section-desc">카테고리 선택부터 메뉴 결정까지, 단 10초면 충분해요.</p>
-
-        <div class="steps">
-            <div class="step-card">
-                <div class="step-num">STEP 01</div>
-                <span class="step-icon">🗂️</span>
-                <div class="step-title">카테고리 선택</div>
-                <p class="step-desc">한식, 중식, 일식, 양식, 분식, 아시안, 구이·탕, 간단식 중 원하는 카테고리를 고르거나 전체에서 뽑아볼 수 있어요.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">STEP 02</div>
-                <span class="step-icon">🎲</span>
-                <div class="step-title">버튼 클릭</div>
-                <p class="step-desc">'랜덤 메뉴 뽑기' 버튼을 누르면 해당 카테고리에서 메뉴를 랜덤 추천해드려요. 마음에 안 들면 다시 뽑으면 돼요.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">STEP 03</div>
-                <span class="step-icon">😋</span>
-                <div class="step-title">맛있게 먹기</div>
-                <p class="step-desc">추천된 메뉴로 오늘의 식사를 즐겨보세요. 메뉴 목록에서 직접 원하는 항목을 클릭해도 돼요.</p>
-            </div>
-        </div>
+    <!-- Loading View -->
+    <div id="view-loading">
+      <div class="spinner"></div>
+      <p>린 스타트업 엔진 가동 중...</p>
+      <small>AI가 비즈니스 솔루션을 분석하고 있습니다</small>
     </div>
-</section>
 
-<!-- ── 카테고리별 음식 소개 ── -->
-<section id="food-guide" class="bg-section">
-    <div class="container">
-        <span class="section-eyebrow">CATEGORIES</span>
-        <h2 class="section-title">다양한 카테고리,<br>취향대로 골라요</h2>
-        <p class="section-desc">각 카테고리별로 어떤 메뉴들이 준비되어 있는지 확인해보세요.</p>
+    <!-- Result View -->
+    <div id="view-result">
+      <div class="result-header">
+        <h2>분석 리포트</h2>
+        <blockquote id="resultQuote"></blockquote>
+      </div>
 
-        <div class="guide-grid">
-            <div class="guide-card">
-                <span class="guide-icon">🇰🇷</span>
-                <div class="guide-name">한식</div>
-                <p class="guide-desc">비빔밥, 삼겹살, 김치찌개 등 우리나라 전통 음식 30가지 이상. 찌개·구이·탕·볶음까지.</p>
-                <div class="guide-tags"><span class="guide-tag">찌개</span><span class="guide-tag">구이</span><span class="guide-tag">탕·국</span><span class="guide-tag">볶음</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🥢</span>
-                <div class="guide-name">중식</div>
-                <p class="guide-desc">짜장·짬뽕부터 마라탕·훠궈까지 한국식 중화요리와 본격 중국 요리를 폭넓게.</p>
-                <div class="guide-tags"><span class="guide-tag">면요리</span><span class="guide-tag">탕수육</span><span class="guide-tag">마라</span><span class="guide-tag">훠궈</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🇯🇵</span>
-                <div class="guide-name">일식</div>
-                <p class="guide-desc">초밥, 라멘, 우동, 돈카츠 등 한국에서 사랑받는 일식 메뉴들.</p>
-                <div class="guide-tags"><span class="guide-tag">초밥</span><span class="guide-tag">라멘</span><span class="guide-tag">덮밥</span><span class="guide-tag">튀김</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🍕</span>
-                <div class="guide-name">양식</div>
-                <p class="guide-desc">피자, 파스타, 스테이크, 햄버거까지 간편한 샌드위치부터 특별한 날 코스까지.</p>
-                <div class="guide-tags"><span class="guide-tag">파스타</span><span class="guide-tag">스테이크</span><span class="guide-tag">피자</span><span class="guide-tag">브런치</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🥟</span>
-                <div class="guide-name">분식</div>
-                <p class="guide-desc">떡볶이, 순대, 김밥 등 누구나 좋아하는 실속 메뉴. 빠르고 저렴하게.</p>
-                <div class="guide-tags"><span class="guide-tag">떡볶이</span><span class="guide-tag">김밥</span><span class="guide-tag">라면</span><span class="guide-tag">만두</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🌏</span>
-                <div class="guide-name">아시안</div>
-                <p class="guide-desc">쌀국수, 팟타이, 인도 카레, 케밥 등 이국적인 동남아·중동 음식들.</p>
-                <div class="guide-tags"><span class="guide-tag">쌀국수</span><span class="guide-tag">카레</span><span class="guide-tag">케밥</span><span class="guide-tag">팟타이</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🔥</span>
-                <div class="guide-name">구이·탕</div>
-                <p class="guide-desc">소·돼지갈비, 곱창, 해물탕, 닭한마리. 모임과 회식에 딱 맞는 푸짐한 메뉴.</p>
-                <div class="guide-tags"><span class="guide-tag">소·돼지</span><span class="guide-tag">해물탕</span><span class="guide-tag">곱창</span><span class="guide-tag">바베큐</span></div>
-            </div>
-            <div class="guide-card">
-                <span class="guide-icon">🥗</span>
-                <div class="guide-name">간단식</div>
-                <p class="guide-desc">샐러드볼, 포케, 아보카도 토스트 등 가볍고 건강한 한 끼 선택지들.</p>
-                <div class="guide-tags"><span class="guide-tag">샐러드</span><span class="guide-tag">포케</span><span class="guide-tag">토스트</span><span class="guide-tag">배달</span></div>
-            </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">
+            <div class="card-icon">👥</div>
+            <div><h3>타겟 고객</h3><span>Target Audience</span></div>
+          </div>
+          <p id="card-target"></p>
         </div>
+
+        <div class="card">
+          <div class="card-title">
+            <div class="card-icon">💡</div>
+            <div><h3>핵심 가치</h3><span>Value Proposition</span></div>
+          </div>
+          <p id="card-value"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <div class="card-icon">🚀</div>
+            <div><h3>MVP</h3><span>Minimum Viable Product</span></div>
+          </div>
+          <p id="card-mvp"></p>
+        </div>
+      </div>
+
+      <button class="reset" onclick="reset()">다시 시작</button>
     </div>
-</section>
 
-<!-- ── 상황별 추천 팁 ── -->
-<section id="tips-section">
-    <div class="container">
-        <span class="section-eyebrow">TIPS</span>
-        <h2 class="section-title">상황별<br>메뉴 추천 가이드</h2>
-        <p class="section-desc">어떤 카테고리를 선택하면 좋을지 참고해보세요.</p>
+  </main>
 
-        <div class="tips-grid">
-            <div class="tip-card">
-                <span class="tip-emoji">👤</span>
-                <div class="tip-title">혼밥이라면</div>
-                <p class="tip-body"><strong>분식</strong>이나 <strong>간단식</strong>을 추천해요. 라면, 김밥, 샐러드볼 등 빠르고 간편한 메뉴가 많아요.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-emoji">💑</span>
-                <div class="tip-title">데이트라면</div>
-                <p class="tip-body">분위기 있는 <strong>양식</strong>이나 <strong>일식</strong>을 추천해요. 파스타, 스테이크, 초밥 등 특별한 메뉴를 만날 수 있어요.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-emoji">👨‍👩‍👧‍👦</span>
-                <div class="tip-title">가족 외식이라면</div>
-                <p class="tip-body">모두가 좋아하는 <strong>한식</strong>이나 <strong>구이·탕</strong>을 추천해요. 함께 나눠 먹기 좋은 푸짐한 메뉴가 많아요.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-emoji">🏢</span>
-                <div class="tip-title">직장 회식이라면</div>
-                <p class="tip-body"><strong>구이·탕</strong>이나 <strong>한식</strong>에서 고르면 실패 없어요. 곱창, 닭갈비 등 단체 메뉴가 준비돼 있어요.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-emoji">🌿</span>
-                <div class="tip-title">건강을 생각한다면</div>
-                <p class="tip-body"><strong>간단식</strong>이나 <strong>한식</strong>에서 선택해보세요. 샐러드볼, 비빔밥, 삼계탕 등 영양 균형 좋은 메뉴들이 있어요.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-emoji">🌍</span>
-                <div class="tip-title">색다른 맛을 원한다면</div>
-                <p class="tip-body"><strong>아시안</strong> 카테고리에서 모험을 즐겨보세요. 팟타이, 인도 카레, 케밥 등 이국적인 음식들을 만날 수 있어요.</p>
-            </div>
-        </div>
-    </div>
-</section>
+  <footer>Powered by Google Gemini · Lean Startup Methodology</footer>
 
-<!-- ── 서비스 소개 ── -->
-<section id="about" class="bg-section">
-    <div class="container">
-        <span class="section-eyebrow">ABOUT</span>
-        <h2 class="section-title">뭐먹지에 대하여</h2>
-        <div class="about-inner" style="margin-top:48px;">
-            <div class="about-left">
-                <div class="about-big-num">100+</div>
-                <div class="about-big-label">등록된 메뉴 수</div>
-                <div style="margin-top:32px;">
-                    <div class="about-big-num" style="font-size:clamp(2.5rem,6vw,4rem);">8</div>
-                    <div class="about-big-label">음식 카테고리</div>
-                </div>
-            </div>
-            <div class="about-text">
-                <p><strong>뭐먹지</strong>는 매일 반복되는 메뉴 고민을 해결하기 위해 만들어진 랜덤 메뉴 추천 서비스입니다. "오늘 점심 뭐 먹지?", "저녁은 뭐가 좋을까?" 하는 고민을 하다가 정작 먹는 시간이 줄어드는 경험, 한 번쯤은 다들 있지 않으신가요?</p>
-                <p>한식, 중식, 일식, 양식, 분식, 아시안, 구이·탕, 간단식 등 8가지 카테고리에 걸쳐 100가지 이상의 메뉴를 수록하고 있어요. 카테고리를 선택하고 버튼 하나만 누르면 그날의 메뉴를 즉시 결정할 수 있습니다.</p>
-                <p>앞으로도 지속적으로 새로운 메뉴를 추가하고, 더 나은 사용자 경험을 제공하기 위해 개선해 나갈 예정입니다. 의견이 있으시면 아래 문의 양식으로 언제든지 연락 주세요.</p>
-            </div>
-        </div>
-    </div>
-</section>
+  <script>
+    const SYSTEM_PROMPT = `너는 린 스타트업 방법론 전문가야. 사용자가 제시한 문제를 분석하여 반드시 아래의 JSON 형식으로만 답변해 줘.
+JSON 외의 다른 텍스트나 마크다운 코드블록은 절대 포함하지 마. 순수 JSON만 반환해.
 
-<!-- ── 제휴 문의 ── -->
-<section id="contact">
-    <div class="container">
-        <span class="section-eyebrow">CONTACT</span>
-        <h2 class="section-title">함께 성장해요</h2>
-        <p class="section-desc">광고, 제휴, 협업 등 다양한 문의사항을 남겨주세요.</p>
+{
+  "targetAudience": "이 문제에 돈을 지불할 구체적 고객군에 대한 상세한 설명",
+  "valueProposition": "솔루션이 주는 명확한 혜택과 차별점에 대한 상세한 설명",
+  "mvp": "코딩 없이 당장 내일이라도 테스트할 수 있는 최소 기능 제품과 구체적인 검증 방법에 대한 상세한 설명"
+}`;
 
-        <div class="form-wrap">
-            <form id="inquiry-form" action="https://formspree.io/f/xjgzqrjz" method="POST">
-                <div class="form-grid">
-                    <div class="form-group"><label>이름 *</label><input type="text" name="name" placeholder="홍길동" required></div>
-                    <div class="form-group"><label>회사/소속</label><input type="text" name="company" placeholder="(주)맛있는회사"></div>
-                    <div class="form-group full"><label>이메일 *</label><input type="email" name="email" placeholder="hello@example.com" required></div>
-                    <div class="form-group full">
-                        <label>문의 유형</label>
-                        <select name="type">
-                            <option value="광고">광고 문의</option>
-                            <option value="제휴">제휴 제안</option>
-                            <option value="협업">콘텐츠 협업</option>
-                            <option value="메뉴추가">메뉴 추가 요청</option>
-                            <option value="기타">기타 문의</option>
-                        </select>
-                    </div>
-                    <div class="form-group full"><label>문의 내용 *</label><textarea name="message" rows="4" placeholder="문의하실 내용을 자유롭게 작성해주세요." required></textarea></div>
-                </div>
-                <div class="form-msg" id="form-msg"></div>
-                <button type="submit" class="submit-btn" id="submit-btn">문의 보내기</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- ── 댓글 ── -->
-<section id="comments">
-    <div class="container">
-        <span class="section-eyebrow">COMMUNITY</span>
-        <h2 class="section-title">오늘 뭐 드셨나요?</h2>
-        <p class="section-desc">오늘의 메뉴와 후기를 댓글로 공유해보세요!</p>
-        <div class="comments-box">
-            <div id="disqus_thread"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ── 푸터 ── -->
-<footer>
-    <div class="footer-inner">
-        <div>
-            <div class="footer-logo">뭐<span>먹</span>지</div>
-            <div class="footer-copy" style="margin-top:4px;">© 2025 뭐먹지. 오늘도 맛있는 하루 되세요.</div>
-        </div>
-        <div class="footer-links">
-            <a class="footer-link" href="#about">서비스 소개</a>
-            <a class="footer-link" href="#contact">제휴 문의</a>
-            <a class="footer-link" href="privacy.html">개인정보처리방침</a>
-        </div>
-    </div>
-</footer>
-
-
-<!-- ── 스크립트 ── -->
-<script>
-    var disqus_config = function () {
-        this.page.url = window.location.href;
-        this.page.identifier = 'mwo-meokji-main';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://woo-7.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<script>
-/* ── 메뉴 데이터 ── */
-const menuData = {
-    korean:   { label:'한식',   items:[{name:'비빔밥',e:'🍚'},{name:'삼겹살',e:'🥓'},{name:'김치찌개',e:'🍲'},{name:'된장찌개',e:'🍲'},{name:'순두부찌개',e:'🍲'},{name:'불고기',e:'🥩'},{name:'갈비탕',e:'🍖'},{name:'설렁탕',e:'🍜'},{name:'해장국',e:'🍵'},{name:'삼계탕',e:'🐔'},{name:'제육볶음',e:'🥩'},{name:'닭갈비',e:'🍗'},{name:'낙지볶음',e:'🐙'},{name:'오징어볶음',e:'🦑'},{name:'두부김치',e:'🍺'},{name:'보쌈',e:'🥬'},{name:'족발',e:'🍖'},{name:'물냉면',e:'🍜'},{name:'비빔냉면',e:'🍜'},{name:'순대국밥',e:'🍛'},{name:'해물탕',e:'🦐'},{name:'부대찌개',e:'🌭'},{name:'청국장',e:'🫙'},{name:'갈비찜',e:'🍖'},{name:'장어구이',e:'🐟'},{name:'곱창전골',e:'🔥'},{name:'감자탕',e:'🥔'},{name:'황태해장국',e:'🐡'},{name:'참치김치찌개',e:'🐟'},{name:'오삼불고기',e:'🦑'}] },
-    chinese:  { label:'중식',   items:[{name:'짜장면',e:'🍜'},{name:'짬뽕',e:'🍜'},{name:'탕수육',e:'🍖'},{name:'마파두부',e:'🌶️'},{name:'깐풍기',e:'🍗'},{name:'양장피',e:'🥗'},{name:'마라탕',e:'🔥'},{name:'훠궈',e:'🍲'},{name:'딤섬',e:'🥟'},{name:'볶음밥',e:'🍳'},{name:'짬뽕밥',e:'🍛'},{name:'중화냉면',e:'🍜'},{name:'유린기',e:'🍗'},{name:'팔보채',e:'🦐'}] },
-    japanese: { label:'일식',   items:[{name:'초밥',e:'🍣'},{name:'라멘',e:'🍜'},{name:'우동',e:'🍜'},{name:'소바',e:'🍜'},{name:'돈카츠',e:'🥩'},{name:'야키토리',e:'🍢'},{name:'타코야키',e:'🐙'},{name:'오코노미야키',e:'🥞'},{name:'규동',e:'🥩'},{name:'일본카레',e:'🍛'},{name:'텐동',e:'🍤'},{name:'카이센동',e:'🦑'},{name:'오야코동',e:'🍗'},{name:'유부우동',e:'🍜'},{name:'스시롤',e:'🌯'},{name:'이자카야 안주',e:'🍶'}] },
-    western:  { label:'양식',   items:[{name:'피자',e:'🍕'},{name:'파스타',e:'🍝'},{name:'스테이크',e:'🥩'},{name:'햄버거',e:'🍔'},{name:'샐러드',e:'🥗'},{name:'리조또',e:'🍚'},{name:'샌드위치',e:'🥪'},{name:'뇨끼',e:'🍝'},{name:'봉골레',e:'🐚'},{name:'알리오올리오',e:'🍝'},{name:'그라탱',e:'🧀'},{name:'스프',e:'🍵'},{name:'치킨',e:'🍗'},{name:'브런치',e:'🥂'}] },
-    snack:    { label:'분식',   items:[{name:'떡볶이',e:'🌶️'},{name:'순대',e:'🥩'},{name:'튀김',e:'🍤'},{name:'김밥',e:'🍙'},{name:'라볶이',e:'🍜'},{name:'치즈떡볶이',e:'🧀'},{name:'핫도그',e:'🌭'},{name:'계란찜',e:'🥚'},{name:'어묵탕',e:'🍢'},{name:'만두',e:'🥟'},{name:'라면',e:'🍜'},{name:'쫄면',e:'🍜'},{name:'잡채',e:'🍜'},{name:'전',e:'🥞'}] },
-    asian:    { label:'아시안', items:[{name:'쌀국수',e:'🍜'},{name:'팟타이',e:'🍜'},{name:'나시고렝',e:'🍳'},{name:'반미',e:'🥖'},{name:'인도카레',e:'🍛'},{name:'탄두리치킨',e:'🍗'},{name:'케밥',e:'🥙'},{name:'팔라펠',e:'🧆'},{name:'버터치킨',e:'🍗'},{name:'똠얌꿍',e:'🦐'},{name:'그린카레',e:'🌿'},{name:'퍼보',e:'🍜'}] },
-    bbq:      { label:'구이·탕',items:[{name:'소갈비',e:'🥩'},{name:'돼지갈비',e:'🍖'},{name:'삼겹살+소주',e:'🥃'},{name:'양고기구이',e:'🐑'},{name:'닭발',e:'🦶'},{name:'곱창',e:'🔥'},{name:'대창',e:'🔥'},{name:'막창',e:'🔥'},{name:'해물탕',e:'🦞'},{name:'닭한마리',e:'🐔'},{name:'오리주물럭',e:'🦆'},{name:'바베큐',e:'🏕️'}] },
-    light:    { label:'간단식', items:[{name:'샐러드볼',e:'🥗'},{name:'포케',e:'🍱'},{name:'그릭요거트볼',e:'🫙'},{name:'아보카도토스트',e:'🥑'},{name:'베이글',e:'🥯'},{name:'과일',e:'🍱'},{name:'냉동식품',e:'❄️'},{name:'편의점 도시락',e:'🏪'},{name:'배달의민족',e:'📱'},{name:'쿠팡이츠',e:'📦'},{name:'굶기',e:'💀'},{name:'아무거나',e:'🎲'}] }
-};
-
-let currentCat = 'all';
-let isRolling = false;
-let menuGridOpen = false;
-
-function getAllMenus() { return Object.values(menuData).flatMap(c => c.items.map(i => ({...i, cat: c.label}))); }
-function getMenus() {
-    if (currentCat === 'all') return getAllMenus();
-    const d = menuData[currentCat];
-    return d ? d.items.map(i => ({...i, cat: d.label})) : [];
-}
-
-function setCategory(cat, btn) {
-    currentCat = cat;
-    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderGrid();
-    updateMenuCount();
-    resetResult();
-}
-
-function updateMenuCount() {
-    const menus = getMenus();
-    document.getElementById('menu-count').textContent = `총 ${menus.length}개 메뉴`;
-}
-
-function renderGrid(sel) {
-    document.getElementById('menu-grid').innerHTML = getMenus().map(m => `
-        <div class="menu-chip${m.name===sel?' selected':''}" onclick="pickSpecific('${m.name}')">
-            <span class="chip-emoji">${m.e}</span>${m.name}
-        </div>`).join('');
-    if (menuGridOpen) {
-        const wrap = document.getElementById('menu-grid-wrap');
-        setTimeout(() => { wrap.style.maxHeight = wrap.scrollHeight + 'px'; }, 10);
+    function showView(name) {
+      ['input', 'loading', 'result'].forEach(v => {
+        const el = document.getElementById('view-' + v);
+        el.style.display = (v === name) ? 'flex' : 'none';
+      });
     }
-}
 
-function toggleMenuGrid() {
-    const wrap  = document.getElementById('menu-grid-wrap');
-    const arrow = document.getElementById('toggle-arrow');
-    const label = document.getElementById('toggle-label-btn');
-    menuGridOpen = !menuGridOpen;
-    if (menuGridOpen) {
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        wrap.style.opacity   = '1';
-        wrap.classList.add('open');
-        arrow.classList.add('open');
-        label.textContent = '📋 메뉴 목록 접기';
-    } else {
-        wrap.style.maxHeight = '0px';
-        wrap.style.opacity   = '0';
-        wrap.classList.remove('open');
-        arrow.classList.remove('open');
-        label.textContent = '📋 메뉴 목록 펼치기';
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.style.display = 'block';
     }
-}
 
-function pickSpecific(name) {
-    const found = getMenus().find(m => m.name === name);
-    if (found) showResult(found);
-}
+    function hideError() {
+      document.getElementById('errorMsg').style.display = 'none';
+    }
 
-function resetResult() {
-    document.getElementById('result-emoji').style.display = 'none';
-    document.getElementById('result-name').innerHTML = '<span class="placeholder-msg">버튼을 눌러<br>오늘의 메뉴를 뽑아봐요</span>';
-    document.getElementById('result-cat').textContent = '';
-}
+    async function generate() {
+      const apiKey    = document.getElementById('apiKey').value.trim();
+      const painPoint = document.getElementById('painPoint').value.trim();
 
-function showResult(menu) {
-    const eEl = document.getElementById('result-emoji');
-    const nEl = document.getElementById('result-name');
-    eEl.style.display = 'block';
-    eEl.textContent = menu.e;
-    eEl.classList.remove('pop-anim'); void eEl.offsetWidth; eEl.classList.add('pop-anim');
-    nEl.innerHTML = '';
-    nEl.style = '';
-    nEl.textContent = menu.name;
-    document.getElementById('result-cat').textContent = menu.cat.toUpperCase();
-    renderGrid(menu.name);
-    fireConfetti();
-}
+      if (!apiKey)    { showError('API 키를 입력해 주세요.'); return; }
+      if (!painPoint) { showError('문제점을 입력해 주세요.'); return; }
+      hideError();
 
-async function pickMenu() {
-    if (isRolling) return;
-    isRolling = true;
-    const btn  = document.getElementById('pick-btn');
-    const eEl  = document.getElementById('result-emoji');
-    const nEl  = document.getElementById('result-name');
-    btn.disabled = true; btn.textContent = '🎰 고르는 중...';
-    const menus = getMenus();
-    eEl.style.display = 'block'; eEl.classList.remove('pop-anim');
-    nEl.innerHTML = '';
-    let count = 0;
-    await new Promise(res => {
-        const iv = setInterval(() => {
-            const r = menus[Math.floor(Math.random() * menus.length)];
-            eEl.textContent = r.e;
-            nEl.textContent = r.name;
-            nEl.className = 'result-food-name rolling-name';
-            if (++count >= 22) { clearInterval(iv); res(); }
-        }, 75);
+      showView('loading');
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+      const body = {
+        contents: [{
+          parts: [{ text: SYSTEM_PROMPT + '\n\n사용자가 제시한 문제: ' + painPoint }]
+        }]
+      };
+
+      try {
+        const res  = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          const msg = data?.error?.message || '알 수 없는 오류가 발생했습니다.';
+          throw new Error(msg);
+        }
+
+        const raw     = data.candidates[0].content.parts[0].text;
+        const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        const parsed  = JSON.parse(cleaned);
+
+        document.getElementById('resultQuote').textContent =
+          '"' + (painPoint.length > 100 ? painPoint.slice(0, 100) + '...' : painPoint) + '"';
+
+        document.getElementById('card-target').textContent = parsed.targetAudience;
+        document.getElementById('card-value').textContent  = parsed.valueProposition;
+        document.getElementById('card-mvp').textContent    = parsed.mvp;
+
+        showView('result');
+      } catch (err) {
+        showView('input');
+        showError(err.message);
+      }
+    }
+
+    function reset() {
+      document.getElementById('painPoint').value = '';
+      hideError();
+      showView('input');
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) generate();
     });
-    nEl.className = 'result-food-name';
-    showResult(menus[Math.floor(Math.random() * menus.length)]);
-    btn.disabled = false; btn.textContent = '🎲 다시 뽑기';
-    isRolling = false;
-}
+  </script>
 
-function fireConfetti() {
-    const box = document.getElementById('confetti');
-    box.innerHTML = '';
-    const cols = ['#FF3B30','#FF9500','#FFCC00','#34C759','#007AFF','#AF52DE'];
-    for (let i = 0; i < 50; i++) {
-        const p = document.createElement('div');
-        p.className = 'cp';
-        p.style.cssText = `left:${Math.random()*100}vw;background:${cols[~~(Math.random()*cols.length)]};width:${Math.random()*8+4}px;height:${Math.random()*8+4}px;border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${Math.random()*2+1.5}s;animation-delay:${Math.random()*.4}s;`;
-        box.appendChild(p);
-    }
-    setTimeout(() => box.innerHTML = '', 3500);
-}
-
-/* ── 제휴 문의 ── */
-document.getElementById('inquiry-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    const msg = document.getElementById('form-msg');
-    btn.disabled = true; btn.textContent = '전송 중...';
-    msg.className = 'form-msg';
-    try {
-        const r = await fetch(this.action, { method:'POST', body:new FormData(this), headers:{Accept:'application/json'} });
-        if (r.ok) {
-            msg.className = 'form-msg ok';
-            msg.textContent = '문의가 접수됐어요! 빠르게 연락드릴게요.';
-            this.reset(); btn.textContent = '문의 보내기';
-        } else throw 0;
-    } catch {
-        msg.className = 'form-msg err';
-        msg.textContent = '전송에 실패했어요. 잠시 후 다시 시도해주세요.';
-        btn.textContent = '문의 보내기';
-    }
-    btn.disabled = false;
-});
-
-renderGrid();
-updateMenuCount();
-</script>
 </body>
 </html>
